@@ -17,7 +17,7 @@ module.exports = appInfo => {
     config.keys = appInfo.name;
     //=====================================中间件====================================//
     config.middleware = ["throttle", "permission", "mock"];
-   
+
     const mock = {};
     const permission = {
         free: true, //默认情况取消权限校验，方便用户使用
@@ -45,7 +45,7 @@ module.exports = appInfo => {
     };
     const throttle = {};
     //=========================================================================//
-    
+
     // 参数验证
     const validate = {
         widelyUndefined: true,
@@ -56,7 +56,7 @@ module.exports = appInfo => {
             enable: false, //线上开启csrf
             headerName: "x-csrf-token", // 携带在header中的csrf名称
         },
-    }; 
+    };
     // 跨域相关
     const cors = {
         origin(app) {
@@ -108,17 +108,17 @@ module.exports = appInfo => {
     */
     let mongoose = null;
     mongoose = {
-        url: "mongodb://127.0.0.1:27017/moyu",
+        url: process.env.MONGO_URL ? process.env.MONGO_URL : "mongodb://127.0.0.1:27017/moyu",
         options: {
-            user: "",
-            pass: "",
+            user: process.env.MONGO_USER ? process.env.MONGO_USER : "",
+            pass: process.env.MONGO_PASS ? process.env.MONGO_PASS : "",
             useUnifiedTopology: true,
         },
         plugins: [],
     };
     //sms短信服务
     const smsConfig = {
-        base: { //基础信息 
+        base: { //基础信息
             accessKeyId: "",
             accessKeySecret: "",
             endpoint: "",
@@ -133,7 +133,7 @@ module.exports = appInfo => {
     };
     //oss服务
     const ossConfig = {
-        base: { //基础信息 
+        base: { //基础信息
             accessKeyId: "",
             accessKeySecret: "",
             arn: "",
